@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // const toyFormContainer = document.querySelector(".container");
   getFetch()
   handleForm()
+  //handleLike()
   //postFetch()
 });
 
@@ -49,6 +50,12 @@ function renderToyObj(toy){
   btn.id = toy['id'];
   // add textContent 'Like'
   btn.textContent = 'Like';
+  
+  // add an event listener to btn for PATCH FETCH
+  btn.addEventListener('click', ()=>{
+    toy['likes'] += 1; 
+    patchFetch(toy);
+  })
 
   // appendChild <h2> <img> <p> <button> to <div class = 'card'>
   cardDiv.appendChild(h2);
@@ -99,5 +106,10 @@ function postFetch(newToy){
   })
   .then(res => res.json())
   .then(newToyObj => renderToyObj(newToyObj))
+}
+
+// -------------------- PATCH FETCH --------------------
+function patchFetch(toy){
+  console.log(toy)
 }
 
