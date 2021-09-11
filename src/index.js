@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   getFetch();
+  handleForm();
 });
 
 function renderToyObj(toy){
@@ -32,6 +33,11 @@ function renderToyObj(toy){
   btn.id = toy['id'];
   // add textContent 'Like'
   btn.textContent = 'Like';
+  
+  // add an event listener to btn for PATCH FETCH
+  btn.addEventListener('click', ()=>{
+    patchFetch(toy, p)
+  });
 
   // appendChild <h2> <img> <p> <button> to <div class = 'card'>
   cardDiv.appendChild(h2);
