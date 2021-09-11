@@ -1,24 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // const addBtn = document.querySelector("#new-toy-btn");
-  // const toyFormContainer = document.querySelector(".container");
   getFetch()
   handleForm()
-  //handleLike()
-  //postFetch()
 });
-
-// -------------------- GET FETCH --------------------
-function getFetch(){
-  fetch('http://localhost:3000/toys')
-  .then(res => res.json())
-  .then(toyArr => handleArr(toyArr))
-}
-
-function handleArr(toyArr){
-  for (let toy of toyArr){
-    renderToyObj(toy)
-  }
-}
 
 function renderToyObj(toy){
   // create a card <div> and add className 'card'
@@ -53,9 +36,8 @@ function renderToyObj(toy){
   
   // add an event listener to btn for PATCH FETCH
   btn.addEventListener('click', ()=>{
-    toy['likes'] += 1; 
-    patchFetch(toy);
-  })
+    patchFetch(toy, p)
+  });
 
   // appendChild <h2> <img> <p> <button> to <div class = 'card'>
   cardDiv.appendChild(h2);
@@ -66,6 +48,19 @@ function renderToyObj(toy){
   // add <div call = 'card'> to DOM by appending it to existing HTML element <div id = 'toy-collection'>
   let toyCollection = document.querySelector('#toy-collection');
   toyCollection.appendChild(cardDiv);
+}
+
+// -------------------- GET FETCH --------------------
+function getFetch(){
+  fetch('http://localhost:3000/toys')
+  .then(res => res.json())
+  .then(toyArr => handleArr(toyArr))
+}
+
+function handleArr(toyArr){
+  for (let toy of toyArr){
+    renderToyObj(toy)
+  }
 }
 
 // -------------------- POST FETCH --------------------
@@ -109,7 +104,19 @@ function postFetch(newToy){
 }
 
 // -------------------- PATCH FETCH --------------------
-function patchFetch(toy){
-  console.log(toy)
+function patchFetch(toy, p){
+  toy['likes'] = toy['likes'] + 1;
+  fetch(`http://localhost:3000/toys/${toy.id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({'likes': toy['likes']})
+  })
+  .then(res => res.json())
+  .then(updatedToy => {
+    p.textContent = `${updatedToy['likes']} likes`;
+  })
 }
 
