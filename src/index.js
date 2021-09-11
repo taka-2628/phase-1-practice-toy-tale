@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  getFetch()
+  getFetch();
 });
 
 // -------------------- GET FETCH --------------------
