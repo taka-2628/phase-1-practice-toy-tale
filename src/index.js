@@ -11,7 +11,7 @@ function getFetch(){
 
 function handleArr(toyArr){
   for (let toy of toyArr){
-    renderToyObj(toy)
+    renderToyObj(toy);
   }
 }
 
