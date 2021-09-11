@@ -2,6 +2,48 @@ document.addEventListener("DOMContentLoaded", () => {
   getFetch();
 });
 
+function renderToyObj(toy){
+  // create a card <div> and add className 'card'
+  let cardDiv = document.createElement('div');
+  cardDiv.className = 'card'
+
+  // create <h2> (toy's name)
+  let h2 = document.createElement('h2');
+  // assign the value that the key 'name' points to in toy obj to <h2> content 
+  h2.textContent = toy['name'];
+
+  // create <img> (toy's image)
+  let img = document.createElement('img');
+  // add calssName 'toy-avatar'
+  img.className = 'toy-avatar';
+  // add src attribute which is assigned to the value (url) that the key image points to in toy obj
+  img.src = toy['image'];
+
+  // create <p> (counts number of likes)
+  let p = document.createElement('p');
+  // interpolate the number of likes the toy has and assign the string to the content of <p>
+  p.textContent = `${toy['likes']} likes`;
+
+  // create <button> (like button)
+  let btn = document.createElement('button');
+  // add className 'toy-avatar'
+  btn.className = 'like-btn';
+  // add id which is the id of toy obj
+  btn.id = toy['id'];
+  // add textContent 'Like'
+  btn.textContent = 'Like';
+
+  // appendChild <h2> <img> <p> <button> to <div class = 'card'>
+  cardDiv.appendChild(h2);
+  cardDiv.appendChild(img);
+  cardDiv.appendChild(p);
+  cardDiv.appendChild(btn);
+
+  // add <div call = 'card'> to DOM by appending it to existing HTML element <div id = 'toy-collection'>
+  let toyCollection = document.querySelector('#toy-collection');
+  toyCollection.appendChild(cardDiv);
+}
+
 // -------------------- GET FETCH --------------------
 function getFetch(){
   fetch('http://localhost:3000/toys')
@@ -11,7 +53,7 @@ function getFetch(){
 
 function handleArr(toyArr){
   for (let toy of toyArr){
-    renderToyObj(toy);
+    renderToyObj(toy)
   }
 }
 
