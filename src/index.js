@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   getFetch()
-  handleForm()
 });
 
 function renderToyObj(toy){
