@@ -65,11 +65,11 @@ function handleArr(toyArr){
 
 // -------------------- POST FETCH --------------------
 function handleForm(){
-  let addToy = false;
   const addBtn = document.querySelector("#new-toy-btn");
   const toyFormContainer = document.querySelector(".container");
   // hide & reveal the form
   addBtn.addEventListener("click", () => {
+    let addToy = false;
     addToy = !addToy;
     if (addToy) {
       toyFormContainer.style.display = "block";
@@ -77,7 +77,7 @@ function handleForm(){
       toyFormContainer.style.display = "none";
     }
   });
-  // Add new toy
+  // create a new toy obj
   const form = document.querySelector('.add-toy-form')
   form.addEventListener('submit', (e)=>{
     e.preventDefault();
